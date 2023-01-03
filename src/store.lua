@@ -1,7 +1,7 @@
 local peri = peripheral.getNames()
 
 local selfid = "turtle_194"
-local trashcanid = "turtle_195"
+local trashcanid = "minecraft:chest_873"
 local storage = {}
 
 local trashcan = peripheral.wrap(trashcanid)
@@ -13,19 +13,31 @@ end
 local function pullStorage()
     storage = {}
     for k,v in pairs(peri) do
-        if peripheral.getType(v) == "inventory" then
+        if v ~= trashcanid and peripheral.getType(v) == "inventory" then
             storage[#storage+1] = v
         end
     end
 end
 
-for i=1, 16 do
-    -- turtle.select(i)
-    if turtle.getItemCount(i) > 0 then
-        local itemName = turtle.getItemDetail(i).name
-        print(itemName)
-        if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
-            trashcan.pullItems(selfid, i)
+local running = true
+while running do
+    for i=1, 16 do
+        if turtle.getItemCount(i) > 0 then
+            local itemName = turtle.getItemDetail(i).name
+            if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
+                --Delete
+                trashcan.pullItems(selfid, i)
+            else
+                --Store
+                local toSend = turtle.getItemCount(i)
+                local send = 0
+                for _,v in pairs(storage) do
+                    if send >= toSend then
+                        break
+                    end
+                    send = send + peripheral.wrap(v).pullItems(selfid, i)
+                end
+            end
         end
     end
 end
