@@ -1,14 +1,8 @@
 local peri = peripheral.getNames()
 
-local selfid = "front"
+local selfid = "turtle_194"
 local trashcanid = "turtle_195"
 local storage = {}
-
-local self = peripheral.wrap(selfid)
-if self == nil then
-    printError("No such turtle found. Fill in the name of this turtle in src/store.lua")
-    return
-end
 
 local trashcan = peripheral.wrap(trashcanid)
 if trashcan == nil then
@@ -30,6 +24,6 @@ for i=1, 16 do
     local itemName = turtle.getItemDetail(i).name
     print(itemName)
     if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
-        self.pushItems(trashcanid, i)
+        trashcan.pullItems(selfid, i)
     end
 end
