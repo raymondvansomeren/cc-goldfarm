@@ -1,7 +1,7 @@
 local peri = peripheral.getNames()
 
-local selfid = "turtle_xx"
-local trashcanid = "turtle_xx"
+local selfid = "front"
+local trashcanid = "turtle_195"
 local storage = {}
 
 local self = peripheral.wrap(selfid)
@@ -27,8 +27,9 @@ end
 
 for i=1, 16 do
     -- turtle.select(i)
-    if turtle.getItemDetail(i).name == not "minecraft:gold_nugget" then
-        print(turtle.getItemDetail(i).name)
+    local itemName = turtle.getItemDetail(i).name
+    print(itemName)
+    if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
         self.pushItems(trashcanid, i)
     end
 end
