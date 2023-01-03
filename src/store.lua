@@ -21,9 +21,11 @@ end
 
 for i=1, 16 do
     -- turtle.select(i)
-    local itemName = turtle.getItemDetail(i).name
-    print(itemName)
-    if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
-        trashcan.pullItems(selfid, i)
+    if turtle.getItemCount(i) > 0 then
+        local itemName = turtle.getItemDetail(i).name
+        print(itemName)
+        if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
+            trashcan.pullItems(selfid, i)
+        end
     end
 end
