@@ -1,5 +1,5 @@
 local files = {
-    "src/store.lua",
+    "store.lua",
 }
 
 local tasks = {}
@@ -8,10 +8,10 @@ for i, file in ipairs(files) do
     -- print("https://raw.githubusercontent.com/raymondvansomeren/cc-goldfarm/blob/vnext/"..file)
 
     tasks[i] = function()
-        local req, err = http.get("https://raw.githubusercontent.com/raymondvansomeren/cc-goldfarm/HEAD/" .. file)
+        local req, err = http.get("https://raw.githubusercontent.com/raymondvansomeren/cc-goldfarm/HEAD/src/" .. file)
         if not req then error("Failed to download " .. file .. ": " .. err, 0) end
     
-        local file = fs.open("goldfarm/" .. file, "w")
+        local file = fs.open("goldfarm/src/" .. file, "w")
         file.write(req.readAll())
         file.close()
     
