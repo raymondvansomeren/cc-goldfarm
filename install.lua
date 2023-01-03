@@ -11,7 +11,7 @@ for i, file in ipairs(files) do
         local req, err = http.get("https://raw.githubusercontent.com/raymondvansomeren/cc-goldfarm/HEAD/" .. file)
         if not req then error("Failed to download " .. file .. ": " .. err, 0) end
     
-        local file = fs.open(".artist.d/src/" .. file, "w")
+        local file = fs.open("goldfarm/" .. file, "w")
         file.write(req.readAll())
         file.close()
     
