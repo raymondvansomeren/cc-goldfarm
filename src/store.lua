@@ -30,12 +30,14 @@ while running do
             else
                 --Store
                 local toSend = turtle.getItemCount(i)
-                local send = 0
+                local sent = 0
                 for _,v in pairs(storage) do
-                    if send >= toSend then
+                    if sent >= toSend then
                         break
                     end
-                    send = send + peripheral.wrap(v).pullItems(selfid, i)
+                    local p = peripheral.wrap(v)
+                    print(("%s %s %s %s"):format(toSend, sent, v, p))
+                    sent = sent + p.pullItems(selfid, i)
                 end
             end
         end
