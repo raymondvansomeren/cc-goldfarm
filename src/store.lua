@@ -28,7 +28,7 @@ local function pullInput()
     end
 
     for slot, item in pairs(input.list()) do
-        input.pushItems("selfid", slot)
+        input.pushItems(selfid, slot)
     end
 end
 
