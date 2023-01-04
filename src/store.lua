@@ -15,6 +15,8 @@ local function pullStorage()
     for k,v in pairs(peri) do
         if v ~= trashcanid and peripheral.getType(v) == "inventory" then
             storage[#storage+1] = peripheral.wrap(v)
+        else
+            print(("v: %s trashcanid: %s"):format(v, trashcanid))
         end
     end
 end
