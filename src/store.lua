@@ -1,5 +1,6 @@
 local peri = peripheral.getNames()
 
+local inputid = "sc-goodies:diamond_chest_148"
 local selfid = "turtle_194"
 local trashcanid = "minecraft:chest_873"
 local storage = {}
@@ -15,11 +16,22 @@ local function pullStorage()
     for k,v in pairs(peri) do
         if v ~= trashcanid and peripheral.hasType(v, "inventory") then
             storage[#storage+1] = peripheral.wrap(v)
-        else
-            print(("v: %s\ntrashcanid: %s\ntype: %s\n"):format(v, trashcanid, peripheral.getType(v)))
         end
     end
 end
+
+local input = peripheral.wrap(inputid)
+local function pullInput()
+    if input == nil then
+        print("Connect and define an input inventory. src/store.lua inputid")
+        return
+    end
+
+    for slot, item in pairs(input.list()) do
+        input.pushItems("selfid", slot)
+    end
+end
+
 
 pullStorage()
 local running = true
