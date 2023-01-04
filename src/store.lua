@@ -37,9 +37,12 @@ while running do
                     end
                     if p ~= nil then
                         sent = sent + p.pullItems(selfid, i)
+                    else
+                        print("AAAAHHH")
                     end
                 end
             end
         end
     end
+    sleep(0.2)
 end
