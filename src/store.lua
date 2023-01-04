@@ -14,7 +14,7 @@ local function pullStorage()
     storage = {}
     for k,v in pairs(peri) do
         if v ~= trashcanid and peripheral.getType(v) == "inventory" then
-            storage[#storage+1] = v
+            storage[#storage+1] = peripheral.wrap(v)
         end
     end
 end
@@ -31,12 +31,10 @@ while running do
                 --Store
                 local toSend = turtle.getItemCount(i)
                 local sent = 0
-                for _,v in pairs(storage) do
+                for _,p in pairs(storage) do
                     if sent >= toSend then
                         break
                     end
-                    local p = peripheral.wrap(v)
-                    print(("%s %s %s %s"):format(toSend, sent, v, p))
                     sent = sent + p.pullItems(selfid, i)
                 end
             end
