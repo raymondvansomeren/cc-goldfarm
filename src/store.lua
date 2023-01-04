@@ -35,7 +35,9 @@ while running do
                     if sent >= toSend then
                         break
                     end
-                    sent = sent + p.pullItems(selfid, i)
+                    if p ~= nil then
+                        sent = sent + p.pullItems(selfid, i)
+                    end
                 end
             end
         end
