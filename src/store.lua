@@ -19,6 +19,7 @@ local function pullStorage()
     end
 end
 
+pullStorage()
 local running = true
 while running do
     for i=1, 16 do
@@ -37,8 +38,6 @@ while running do
                     end
                     if p ~= nil then
                         sent = sent + p.pullItems(selfid, i)
-                    else
-                        print("AAAAHHH")
                     end
                 end
             end
