@@ -36,6 +36,7 @@ end
 pullStorage()
 local running = true
 while running do
+    pullInput()
     for i=1, 16 do
         if turtle.getItemCount(i) > 0 then
             local itemName = turtle.getItemDetail(i).name
