@@ -1,8 +1,8 @@
 local peri = peripheral.getNames()
 
-local inputid = "sc-goodies:diamond_chest_148"
-local selfid = "turtle_194"
-local trashcanid = "minecraft:chest_873"
+local inputid = "sc-goodies:diamond_chest_581"
+local selfid = "turtle_435"
+local trashcanid = "minecraft:chest_1753"
 local storage = {}
 
 local trashcan = peripheral.wrap(trashcanid)
@@ -14,7 +14,7 @@ end
 local function pullStorage()
     storage = {}
     for k,v in pairs(peri) do
-        if v ~= trashcanid and peripheral.hasType(v, "inventory") then
+        if v ~= inputid and v ~= trashcanid and peripheral.hasType(v, "inventory") then
             storage[#storage+1] = peripheral.wrap(v)
         end
     end
