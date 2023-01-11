@@ -1,3 +1,4 @@
+local peri = peripheral.getNames()
 local inputid = "front"
 local selfid = "turtle_437"
 
