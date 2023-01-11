@@ -7,7 +7,7 @@ local storage = {}
 
 local trashcan = peripheral.wrap(trashcanid)
 if trashcan == nil then
-    printError("No such trashcan found. Fill in a connected trashcanid in goldfarm/src/sorter.lua")
+    printError("No such trashcan found. Fill in a connected trashcanid in src/store.lua")
     return
 end
 
@@ -23,7 +23,7 @@ end
 local input = peripheral.wrap(inputid)
 local function pullInput()
     if input == nil then
-        print("Connect and define an input inventory. goldfarm/src/sorter.lua inputid")
+        print("Connect and define an input inventory. src/store.lua inputid")
         return
     end
 
@@ -58,5 +58,5 @@ while running do
             end
         end
     end
-    sleep(1)
+    sleep(0.2)
 end

@@ -1,15 +1,5 @@
-local peri = peripheral.getNames()
-
-local inputid = "sc-goodies:diamond_chest_581"
-local selfid = "turtle_435"
-local trashcanid = "minecraft:chest_1753"
-local storage = {}
-
-local trashcan = peripheral.wrap(trashcanid)
-if trashcan == nil then
-    printError("No such trashcan found. Fill in a connected trashcanid in goldfarm/src/sorter.lua")
-    return
-end
+local inputid = "front"
+local selfid = "turtle_437"
 
 local function pullStorage()
     storage = {}
@@ -23,27 +13,48 @@ end
 local input = peripheral.wrap(inputid)
 local function pullInput()
     if input == nil then
-        print("Connect and define an input inventory. goldfarm/src/sorter.lua inputid")
+        print("Connect and define an input inventory. goldfarm/src/crafter.lua inputid")
         return
     end
 
     for slot, item in pairs(input.list()) do
         input.pushItems(selfid, slot)
     end
-end
 
+    -- UGLY, I KNOW
+    if turtle.getItemCount(4) > 0 then
+        turtle.select(4)
+        turtle.transferTo(5)
+    elseif turtle.getItemCount(8) > 0 then
+        turtle.select(8)
+        turtle.transferTo(9)
+    elseif turtle.getItemCount(12) > 0 then
+        turtle.select(12)
+        turtle.drop()
+    elseif turtle.getItemCount(13) > 0 then
+        turtle.select(13)
+        turtle.drop()
+    elseif turtle.getItemCount(14) > 0 then
+        turtle.select(14)
+        turtle.drop()
+    elseif turtle.getItemCount(15) > 0 then
+        turtle.select(15)
+        turtle.drop()
+    elseif turtle.getItemCount(16) > 0 then
+        turtle.select(16)
+        turtle.drop()
+    end
+end
 
 pullStorage()
 local running = true
 while running do
     pullInput()
+    turtle.craft()
+
     for i=1, 16 do
         if turtle.getItemCount(i) > 0 then
-            local itemName = turtle.getItemDetail(i).name
-            if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
-                --Delete
-                trashcan.pullItems(selfid, i)
-            else
+            if turtle.getItemDetail().name == "minecraft:gold_ingot" then
                 --Store
                 local toSend = turtle.getItemCount(i)
                 local sent = 0
