@@ -24,7 +24,7 @@ local function pullInput()
     for inputSlot, item in pairs(input.list()) do
         for i, turtleSlot in pairs(slots) do
             if turtle.getItemCount(turtleSlot) == 0 then
-                input.pushItems(config.crafter, inputSlot, 64, turtleSlot)
+                input.pushItems(config.crafter, inputSlot, 16, turtleSlot)
                 break
             end
         end
