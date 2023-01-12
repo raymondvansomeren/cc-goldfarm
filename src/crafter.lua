@@ -48,7 +48,7 @@ while running do
                         break
                     end
                     if p ~= nil then
-                        sent = sent + p.pullItems(config.crafter, i)
+                        sent = sent + p.pullItems(config.storer, i)
                     end
                 end
             end
