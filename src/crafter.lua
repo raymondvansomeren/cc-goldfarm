@@ -39,7 +39,7 @@ while running do
 
     for i=1, 16 do
         if turtle.getItemCount(i) > 0 then
-            if turtle.getItemDetail().name == "minecraft:gold_ingot" then
+            if turtle.getItemDetail(i).name == "minecraft:gold_ingot" then
                 --Store
                 local toSend = turtle.getItemCount(i)
                 local sent = 0
