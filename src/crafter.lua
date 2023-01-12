@@ -1,30 +1,29 @@
-local peri = peripheral.getNames()
-local inputid = "minecraft:chest_1755"
-local selfid = "turtle_446"
+dofile("config.lua")
 
+local peri = peripheral.getNames()
 local storage = {}
 
 local function pullStorage()
     storage = {}
     for k,v in pairs(peri) do
-        if v ~= inputid and v ~= trashcanid and peripheral.hasType(v, "inventory") then
+        if v ~= dropsid and v ~= nuggetsid and v ~= trashcanid and peripheral.hasType(v, "inventory") then
             storage[#storage+1] = peripheral.wrap(v)
         end
     end
 end
 
 local slots = {1,2,3,5,6,7,9,10,11}
-local input = peripheral.wrap(inputid)
+local input = peripheral.wrap(nuggetsid)
 local function pullInput()
     if input == nil then
-        print("Connect and define an input inventory. goldfarm/src/crafter.lua inputid")
+        print("Connect and define an input inventory. goldfarm/src/config.lua nuggetsid")
         return
     end
 
     for inputSlot, item in pairs(input.list()) do
         for i, turtleSlot in pairs(slots) do
             if turtle.getItemCount(turtleSlot) == 0 then
-                input.pushItems(selfid, inputSlot, 64, turtleSlot)
+                input.pushItems(crafter, inputSlot, 64, turtleSlot)
                 break
             end
         end
@@ -48,7 +47,7 @@ while running do
                         break
                     end
                     if p ~= nil then
-                        sent = sent + p.pullItems(selfid, i)
+                        sent = sent + p.pullItems(crafter, i)
                     end
                 end
             end

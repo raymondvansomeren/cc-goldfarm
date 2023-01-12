@@ -1,0 +1,5 @@
+local dropsid = "sc-goodies:diamond_chest_581"
+local trashcanid = "minecraft:chest_1753"
+local nuggetsid = "minecraft:chest_1755"
+local sorter = "turtle_435"
+local crafter = "turtle_446"
