@@ -13,6 +13,7 @@ local function pullStorage()
     end
 end
 
+local slots = {1,2,3,5,6,7,9,10,11}
 local input = peripheral.wrap(inputid)
 local function pullInput()
     if input == nil then
@@ -20,32 +21,13 @@ local function pullInput()
         return
     end
 
-    for slot, item in pairs(input.list()) do
-        input.pushItems(selfid, slot)
-    end
-
-    -- UGLY, I KNOW
-    if turtle.getItemCount(4) > 0 then
-        turtle.select(4)
-        turtle.transferTo(5)
-    elseif turtle.getItemCount(8) > 0 then
-        turtle.select(8)
-        turtle.transferTo(9)
-    elseif turtle.getItemCount(12) > 0 then
-        turtle.select(12)
-        turtle.drop()
-    elseif turtle.getItemCount(13) > 0 then
-        turtle.select(13)
-        turtle.drop()
-    elseif turtle.getItemCount(14) > 0 then
-        turtle.select(14)
-        turtle.drop()
-    elseif turtle.getItemCount(15) > 0 then
-        turtle.select(15)
-        turtle.drop()
-    elseif turtle.getItemCount(16) > 0 then
-        turtle.select(16)
-        turtle.drop()
+    for inputSlot, item in pairs(input.list()) do
+        for i, turtleSlot in pairs(slots) do
+            if turtle.getItemCount(i) == 0 then
+                input.pushItems(selfid, inputSlot, 64, turtleSlot)
+                break
+            end
+        end
     end
 end
 
