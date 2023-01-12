@@ -13,7 +13,7 @@ end
 local function pullStorage()
     storage = {}
     for k,v in pairs(peri) do
-        if v ~= config.nuggetsid and v ~= config.dropsid and v ~= config.trashcanid and peripheral.hasType(v, "inventory") then
+        if v ~= config.dropsid and v ~= config.trashcanid and peripheral.hasType(v, "inventory") then
             storage[#storage+1] = peripheral.wrap(v)
         end
     end

@@ -54,5 +54,5 @@ while running do
             end
         end
     end
-    sleep(5)
+    sleep(1)
 end
