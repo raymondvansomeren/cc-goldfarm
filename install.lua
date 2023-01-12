@@ -2,6 +2,7 @@ local files = {
     "sorter.lua",
     "crafter.lua",
     "trashcan.lua",
+    "config.lua"
 }
 
 local tasks = {}
