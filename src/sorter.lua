@@ -1,32 +1,33 @@
-dofile("config.lua")
+package.path = '*.lua;' .. package.path
+require "config"
 
 local peri = peripheral.getNames()
 local storage = {}
 
-local trashcan = peripheral.wrap(trashcanid)
+local trashcan = peripheral.wrap(config.trashcanid)
 if trashcan == nil then
-    printError("No such trashcan found. Fill in a connected trashcanid in goldfarm/src/config.lua")
+    printError("No such trashcan found. Fill in a connected config.trashcanid in goldfarm/src/config.lua")
     return
 end
 
 local function pullStorage()
     storage = {}
     for k,v in pairs(peri) do
-        if v ~= nuggetsid and v ~= dropsid and v ~= trashcanid and peripheral.hasType(v, "inventory") then
+        if v ~= config.nuggetsid and v ~= config.dropsid and v ~= config.trashcanid and peripheral.hasType(v, "inventory") then
             storage[#storage+1] = peripheral.wrap(v)
         end
     end
 end
 
-local input = peripheral.wrap(dropsid)
+local input = peripheral.wrap(config.dropsid)
 local function pullInput()
     if input == nil then
-        print("Connect and define an input inventory. goldfarm/src/config.lua dropsid")
+        print("Connect and define an input inventory. goldfarm/src/config.lua config.dropsid")
         return
     end
 
     for slot, item in pairs(input.list()) do
-        input.pushItems(sorter, slot)
+        input.pushItems(config.sorter, slot)
     end
 end
 
@@ -40,7 +41,7 @@ while running do
             local itemName = turtle.getItemDetail(i).name
             if itemName ~= nil and itemName ~= "minecraft:gold_nugget" then
                 --Delete
-                trashcan.pullItems(sorter, i)
+                trashcan.pullItems(config.sorter, i)
             else
                 --Store
                 local toSend = turtle.getItemCount(i)
@@ -50,7 +51,7 @@ while running do
                         break
                     end
                     if p ~= nil then
-                        sent = sent + p.pullItems(sorter, i)
+                        sent = sent + p.pullItems(config.sorter, i)
                     end
                 end
             end
