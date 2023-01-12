@@ -23,7 +23,7 @@ local function pullInput()
 
     for inputSlot, item in pairs(input.list()) do
         for i, turtleSlot in pairs(slots) do
-            if turtle.getItemCount(i) == 0 then
+            if turtle.getItemCount(turtleSlot) == 0 then
                 input.pushItems(selfid, inputSlot, 64, turtleSlot)
                 break
             end
