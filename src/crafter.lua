@@ -1,6 +1,8 @@
 local peri = peripheral.getNames()
-local inputid = "front"
-local selfid = "turtle_437"
+local inputid = "minecraft:chest_1755"
+local selfid = "turtle_446"
+
+local storage = {}
 
 local function pullStorage()
     storage = {}
@@ -70,5 +72,5 @@ while running do
             end
         end
     end
-    sleep(1)
+    sleep(5)
 end
